@@ -1,44 +1,47 @@
-# 7 Aug 2024, my first try without reading the walk-through, just the flowchart:
+"""
+Refactored Calculator, 7 Aug 2024
+930am: my first try without reading the walk-through.
+4pm: revisions after reading walk-through don't work!
+The use of try-except is interesting, but the use of int(num) doesn't work.
+427pm: linted using pylint: code looks AMAZING... all in neat functions!
+"""
 
 def prompt(message):
     print(f"=> {message}")
 
 def is_valid_number(num):
-    if num.isdigit():
-        return True
-    else:
-        return False
+    return num.isdigit()
 
 def is_valid_operator(op):
-    if op.lower() in ['a', 's' ,'m' , 'd']:
-        return True
-    else:
-        return False
+    return op.lower() in ['a', 's' ,'m' , 'd']
 
 def invalid_number_check(num):
-    while is_valid_number(num) == False:
-        prompt("I'm sorry, that's not a valid number. Please key in a valid number: ")
+    while is_valid_number(num) is False:
+        prompt("I'm sorry, that's not a valid number.")
+        prompt("Please key in a valid number: ")
         num = input()
     return num
 
 def invalid_operator_check(op):
-    while is_valid_operator(op) == False:
-        prompt("I'm sorry, that's not a valid operator. Please key in a valid operator: ")
-        prompt("Type\n'a' to add;\n's' to substract;\n'm' to multiply;\n'd' to divide.\n")
+    while is_valid_operator(op) is False:
+        prompt("I'm sorry, that's not a valid operator.")
+        prompt("Please key in a valid operator: ")
+        prompt("Type\n'a' to add;\n's' to substract; \
+               \n'm' to multiply;\n'd' to divide.\n")
         op = input()
     return op
 
 # perform calculation, using match-case, and display the result.
-def calculation(num1, num2):
+def calculation(numb1, numb2):
     match operator.lower():
         case 'a':
-            return int(num1 + num2)
+            return int(numb1 + numb2)
         case 's':
-            return int(num1 - num2)
+            return int(numb1 - numb2)
         case 'm':
-            return int(num1 * num2)
+            return int(numb1 * numb2)
         case 'd':
-            return (num1 / num2)
+            return numb1 / numb2
 
 prompt("Welcome to the Calculator!")
 prompt("Enter the first number: ")
@@ -49,8 +52,10 @@ prompt("Enter the second number: ")
 num2 = input()
 num2 = invalid_number_check(num2)
 
-prompt("What type of operation will you like to perform? Type\n'a' to add;\n's' to substract;\n'm' to multiply;\n'd' to divide.\n")
+prompt("""What type of operation will you like to perform?
+Type\n'a' to add;\n's' to substract;\n'm' to multiply;\n'd' to divide.\n""")
 operator = input()
 operator = invalid_operator_check(operator)
 
-print(f"The result of your calculation is {calculation(float(num1),float(num2)):.2f}.")
+print(f"""=> The result of your calculation is:
+=>    {calculation(float(num1),float(num2)):.2f}.""")
