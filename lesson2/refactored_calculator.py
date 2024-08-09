@@ -53,29 +53,28 @@ def calculation(numb1, numb2):
             return numb1 / numb2
 
 calculate = True
-prompt("Welcome to the Calculator!")
+prompt(msg_data["welcome"])
 
 while calculate:
-    prompt("Enter the first number: ")
+    prompt(msg_data["first_number"])
     num1 = input()
     num1 = invalid_number_check(num1)
 
-    prompt("Enter the second number: ")
+    prompt(msg_data["second_number"])
     num2 = input()
     num2 = invalid_number_check(num2)
 
-    prompt("""What type of operation will you like to perform? Type
-'a' to add;\n's' to substract;\n'm' to multiply;\n'd' to divide.\n""")
+    prompt(msg_data["operation_type"])
     operator = input()
     operator = invalid_operator_check(operator)
 
     print(f"""=> The result of your calculation is:
     =>    {calculation(float(num1),float(num2)):.2f}.""")
 
-    prompt("Would you like to do another calculation? Y/n")
+    prompt(msg_data["another_calculation"])
     user_wishes = input()
     user_wishes = invalid_wish_check(user_wishes)
     if user_wishes not in ['Y', 'y']:
         calculate = False
 
-prompt("Thank you for using the calculator! See you next time!")
+prompt(msg_data["thank_you"])
