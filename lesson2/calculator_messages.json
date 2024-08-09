@@ -1,11 +1,30 @@
 {
-	"welcome": "Welcome to the Calculator!",
-	"first_number": "Enter the first number: ",
-	"second_number": "Enter the second number: ",
-	"operation_type": "What type of operation will you like to perform? Type:\n'a' to add;\n's' to substract;\n'm' to multiply;\n'd' to divide.\n",
-	"another_calculation": "Would you like to do another calculation? Y/n",
-	"invalid_number": "I'm sorry, that's not a valid number.\nPlease key in a valid number",
-	"invalid_operator": "I'm sorry, that's not a valid operator.\nPlease key in a valid operator: Type\n'a' to add;\n's' to substract; \n'm' to multiply;\n'd' to divide.\n",
-	"invalid_wish": "I'm sorry,that's not a valid choice.\nPlease key in Y/n:",
-	"thank_you": "Thank you for using the calculator! See you next time!"
+	"language": "Welcome! What language will you be using?\n Type:\n'e' for English;\n'f' for French.",
+	"invalid_language": "Sorry, the language isn't available.\n Type:\n'e' for English;\n'f' for French.",
+	"en":
+	{
+		"welcome": "Welcome to the Calculator!",
+		"first_number": "Enter the first number: ",
+		"second_number": "Enter the second number: ",
+		"operation_type": "What type of operation will you like to perform? Type:\n'a' to add;\n's' to substract;\n'm' to multiply;\n'd' to divide.\n",
+		"another_calculation": "Would you like to do another calculation? Y/n",
+		"invalid_number": "I'm sorry, that's not a valid number.\nPlease key in a valid number",
+		"invalid_operator": "I'm sorry, that's not a valid operator.\nPlease key in a valid operator: Type\n'a' to add;\n's' to substract; \n'm' to multiply;\n'd' to divide.\n",
+		"invalid_wish": "I'm sorry,that's not a valid choice.\nPlease key in Y/n:",
+		"thank_you": "Thank you for using the calculator! See you next time!",
+		"result": "The result of your calculation is: "
+	},
+	"fr":
+	{
+		"welcome": "Bienvenue dans la calculatrice !",
+		"first_number": "Entrez le premier numéro :",
+		"second_number": "Entrez le deuxième numéro :",
+		"operation_type": "Quel type d'opération souhaitez-vous effectuer ? Tapez :\n'a' pour additionner ;\n's' pour soustraire ;\n'a' pour multiplier ;\n'd' pour diviser.\n",
+		"another_calculation": "Voulez-vous faire un autre calcul ? Y(pour oui)/n",
+		"invalid_number": "Je suis désolé, ce n'est pas un numéro valide.\nVeuillez saisir un numéro valide",
+		"invalid_operator": "Désolé, ce n'est pas un opérateur valide.\nVeuillez saisir un opérateur valide : Tapez\n'a' pour ajouter ;\n's' pour soustraire ; \n'm' pour multiplier ;\n'd' pour diviser.\n",
+		"invalid_wish": "Je suis désolé, ce n'est pas un choix valide.\nVeuillez saisir Y(pour oui)/n :",
+		"thank_you": "Merci d'avoir utilisé la calculatrice ! À la prochaine !",
+		"result": "Le résultat de votre calcul est:"
+	}
 }
