@@ -1,0 +1,11 @@
+{
+	"welcome": "Welcome to the Calculator!",
+	"first_number": "Enter the first number: ",
+	"second_number": "Enter the second number: ",
+	"operation_type": "What type of operation will you like to perform? Type:\n'a' to add;\n's' to substract;\n'm' to multiply;\n'd' to divide.\n",
+	"another_calculation": "Would you like to do another calculation? Y/n",
+	"invalid_number": "I'm sorry, that's not a valid number.\nPlease key in a valid number",
+	"invalid_operator": "I'm sorry, that's not a valid operator.\nPlease key in a valid operator: Type\n'a' to add;\n's' to substract; \n'm' to multiply;\n'd' to divide.\n",
+	"invalid_wish": "I'm sorry,that's not a valid choice.\nPlease key in Y/n:",
+	"thank_you": "Thank you for using the calculator! See you next time!"
+}
