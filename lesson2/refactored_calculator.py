@@ -4,7 +4,14 @@ Refactored Calculator, 7 Aug 2024
 4pm: revisions after reading walk-through don't work!
 The use of try-except is interesting, but the use of int(num) doesn't work.
 427pm: linted using pylint: code looks AMAZING... all in neat functions!
+
+9 Aug 24 1113am: linted using pylint again. Now adding JSON functionality.
 """
+
+import json
+
+with open('calculator_messages.json', 'r') as file:
+    msg_data = json.load(file)
 
 def prompt(message):
     print(f"=> {message}")
@@ -17,24 +24,19 @@ def is_valid_operator(op):
 
 def invalid_number_check(num):
     while is_valid_number(num) is False:
-        prompt("I'm sorry, that's not a valid number.")
-        prompt("Please key in a valid number: ")
+        prompt(msg_data["invalid_number"])
         num = input()
     return num
 
 def invalid_operator_check(op):
     while is_valid_operator(op) is False:
-        prompt("I'm sorry, that's not a valid operator.")
-        prompt("Please key in a valid operator: ")
-        prompt("Type\n'a' to add;\n's' to substract; \
-               \n'm' to multiply;\n'd' to divide.\n")
+        prompt(msg_data["invalid_operator"])
         op = input()
     return op
 
 def invalid_wish_check(choice):
     while choice not in ['Y', 'y', 'N', 'n']:
-        prompt("I'm sorry,that's not a valid choice.")
-        prompt("Please key in Y/n: ")
+        prompt(msg_data["invalid_wish"])
         choice = input()
     return choice
 
