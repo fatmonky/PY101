@@ -8,6 +8,7 @@ The use of try-except is interesting, but the use of int(num) doesn't work.
 9 Aug 24 1113am: linted using pylint again. Now adding JSON functionality.
 1137am: added all messages into calculator_messages.json file, and 
 program works. Needed the hint!
+1229pm: completed Calculator bonuses.
 
 """
 
