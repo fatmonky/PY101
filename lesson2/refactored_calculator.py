@@ -62,8 +62,8 @@ while calculate:
     num2 = input()
     num2 = invalid_number_check(num2)
 
-    prompt("""What type of operation will you like to perform?
-    Type\n'a' to add;\n's' to substract;\n'm' to multiply;\n'd' to divide.\n""")
+    prompt("""What type of operation will you like to perform? Type
+'a' to add;\n's' to substract;\n'm' to multiply;\n'd' to divide.\n""")
     operator = input()
     operator = invalid_operator_check(operator)
 
