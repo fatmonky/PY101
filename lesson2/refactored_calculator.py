@@ -80,7 +80,7 @@ def calculation(numb1, numb2, operator):
         case 'm':
             return float(numb1) * float(numb2)
         case 'd':
-            try: 
+            try:
                 float(numb1) / float(numb2)
             except ZeroDivisionError:
                 return 'e'
@@ -95,7 +95,7 @@ def main():
 
     calculate = True
     prompt(lg["welcome"])
-    
+
     while calculate:
         clear_screen()
         prompt(lg["first_number"])
@@ -109,7 +109,7 @@ def main():
         prompt(lg["operation_type"])
         operator = input()
         operator = invalid_operator_check(operator)
-        
+
         if calculation(num1, num2, operator) == 'e':
             print("You've tried to divide by zero! Please try again.")
             time.sleep(3)
