@@ -10,18 +10,34 @@ The use of try-except is interesting, but the use of int(num) doesn't work.
 program works. Needed the hint!
 1229pm: completed Calculator bonuses.
 
+14 Aug 24 954am: 
+    TODO: address divide by zero error
+    TODO: clear screen
+
 """
 
 import json
+import os
+import time
 
 with open('calculator_messages.json', 'r') as file:
     msg_data = json.load(file)
+
+def clear_screen():
+    os.system('clear')
 
 def prompt(message):
     print(f"=> {message}")
 
 def is_valid_number(num):
-    return num.isdigit() or isinstance(float(num), float)
+    try:
+        float_num = float(num)
+    except ValueError:
+        return False
+    if num.isdigit():
+        return True
+    if isinstance(float_num, float):
+        return True
 
 def is_valid_operator(op):
     return op.lower() in ['a', 's' ,'m' , 'd']
@@ -55,44 +71,59 @@ def invalid_wish_check(choice):
     return choice
 
 # perform calculation, using match-case, and display the result.
-def calculation(numb1, numb2):
+def calculation(numb1, numb2, operator):
     match operator.lower():
         case 'a':
-            return int(numb1 + numb2)
+            return float(numb1) + float(numb2)
         case 's':
-            return int(numb1 - numb2)
+            return float(numb1) - float(numb2)
         case 'm':
-            return int(numb1 * numb2)
+            return float(numb1) * float(numb2)
         case 'd':
-            return numb1 / numb2
+            try: 
+                float(numb1) / float(numb2)
+            except ZeroDivisionError:
+                return 'e'
+            return float(numb1) / float(numb2)
 
-prompt(msg_data["language"])
-lg = input()
-lg = invalid_language_check(lg)
 
-calculate = True
-prompt(lg["welcome"])
+def main():
+    prompt(msg_data["language"])
+    global lg
+    lg = input()
+    lg = invalid_language_check(lg)
 
-while calculate:
-    prompt(lg["first_number"])
-    num1 = input()
-    num1 = invalid_number_check(num1)
+    calculate = True
+    prompt(lg["welcome"])
+    
+    while calculate:
+        clear_screen()
+        prompt(lg["first_number"])
+        num1 = input()
+        num1 = invalid_number_check(num1)
 
-    prompt(lg["second_number"])
-    num2 = input()
-    num2 = invalid_number_check(num2)
+        prompt(lg["second_number"])
+        num2 = input()
+        num2 = invalid_number_check(num2)
 
-    prompt(lg["operation_type"])
-    operator = input()
-    operator = invalid_operator_check(operator)
+        prompt(lg["operation_type"])
+        operator = input()
+        operator = invalid_operator_check(operator)
+        
+        if calculation(num1, num2, operator) == 'e':
+            print("You've tried to divide by zero! Please try again.")
+            time.sleep(3)
+            continue
+        prompt(lg["result"])
+        print(f"=>    {calculation(float(num1),float(num2),operator):.2f}.")
 
-    prompt(lg["result"])
-    print(f"=>    {calculation(float(num1),float(num2)):.2f}.")
+        prompt(lg["another_calculation"])
+        user_wishes = input()
+        user_wishes = invalid_wish_check(user_wishes)
+        if user_wishes not in ['Y', 'y']:
+            calculate = False
+        clear_screen()
 
-    prompt(lg["another_calculation"])
-    user_wishes = input()
-    user_wishes = invalid_wish_check(user_wishes)
-    if user_wishes not in ['Y', 'y']:
-        calculate = False
+    prompt(lg["thank_you"])
 
-prompt(lg["thank_you"])
+main()
