@@ -111,8 +111,8 @@ def main():
         operator = invalid_operator_check(operator)
 
         if calculation(num1, num2, operator) == 'e':
-            print("You've tried to divide by zero! Please try again.")
-            time.sleep(3)
+            prompt(lg["divide_zero"])
+            time.sleep(2)
             continue
         prompt(lg["result"])
         print(f"=>    {calculation(float(num1),float(num2),operator):.2f}.")
