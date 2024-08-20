@@ -14,13 +14,13 @@ program works. Needed the hint!
     TODO: address divide by zero error
     TODO: clear screen
 
+20 Aug 453pm: completed incorporating Brandi's feedback! 
+
 """
 
 import json
 import os
 import time
-
-lang = ""
 
 with open('calculator_messages.json', 'r') as file:
     msg_data = json.load(file)
@@ -31,7 +31,6 @@ def clear_screen():
 def choose_language():
     clear_screen()
     prompt(msg_data["language"])
-    global lang
     lang = input().strip()
     lang = invalid_language_check(lang)
     return lang
@@ -51,17 +50,17 @@ def is_valid_number(num):
     else:
         return False
 
-def enter_number(message):
+def enter_number(message, lang):
     prompt(lang[message])
     num = input().strip()
-    num = invalid_number_check(num)
+    num = invalid_number_check(num, lang)
     return num
 
 def is_valid_operator(op):
-    return op.lower() in ['a', 's' ,'m' , 'd']
+    return op.lower() in msg_data["valid_operators"]
 
 def invalid_language_check(lang):
-    while lang not in ['e', 'E', 'f', 'F']:
+    while lang not in msg_data["valid_languages"]:
         prompt(msg_data["invalid_language"])
         lang = input().strip()
     if lang in ('f', 'F'):
@@ -70,28 +69,28 @@ def invalid_language_check(lang):
         lang = msg_data['en']
     return lang
 
-def invalid_number_check(num):
+def invalid_number_check(num, lang):
     while is_valid_number(num) is False:
         prompt(lang["invalid_number"])
         num = input().strip()
     return num
 
-def invalid_operator_check(op):
+def invalid_operator_check(op, lang):
     while is_valid_operator(op) is False:
         prompt(lang["invalid_operator"])
         op = input().strip()
     return op
 
-def invalid_wish_check(choice):
+def invalid_wish_check(choice, lang):
     while choice not in lang["valid_wishes"]:
         prompt(lang["invalid_wish"])
         choice = input().strip()
     return choice
 
-def operator_choice():
+def operator_choice(lang):
     prompt(lang["operation_type"])
     operator = input().strip()
-    operator = invalid_operator_check(operator)
+    operator = invalid_operator_check(operator, lang)
     return operator
 
 # perform calculation, using match-case, and display the result.
@@ -112,20 +111,20 @@ def calculation(numb1, numb2, operator):
                 return 'e'
             return numb1 / numb2
 
-def display_result(numb1, numb2, operator):
-        prompt(lang["result"])
-        print(f"=>    {calculation(float(numb1),float(numb2),operator):.2f}")
+def display_result(numb1, numb2, operator, lang):
+    prompt(lang["result"])
+    print(f"=>    {calculation(float(numb1),float(numb2),operator):.2f}")
 
 
-def calculate_again():
+def calculate_again(lang):
     prompt(lang["another_calculation"])
     user_wishes = input().strip()
-    user_wishes = invalid_wish_check(user_wishes)
+    user_wishes = invalid_wish_check(user_wishes, lang)
     return user_wishes
 
 
 def main():
-    choose_language()
+    lang = choose_language()
     calculate = True
     prompt(lang["welcome"])
     time.sleep(0.5)
@@ -133,16 +132,16 @@ def main():
     while calculate:
         clear_screen()
 
-        num1 = enter_number("first_number")
-        num2 = enter_number("second_number")
-        operator = operator_choice()
+        num1 = enter_number("first_number", lang)
+        num2 = enter_number("second_number", lang)
+        operator = operator_choice(lang)
 
         if calculation(num1, num2, operator) == 'e':
             prompt(lang["divide_zero"])
             time.sleep(2)
             continue
-        display_result(num1, num2, operator)
-        user_wishes = calculate_again()
+        display_result(num1, num2, operator, lang)
+        user_wishes = calculate_again(lang)
         if user_wishes not in lang["calc_again"]:
             calculate = False
         clear_screen()

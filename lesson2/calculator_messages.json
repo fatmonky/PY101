@@ -1,6 +1,8 @@
 {
 	"language": "Welcome! What language will you be using?\n Type:\n'e' for English;\n'f' for French.",
 	"invalid_language": "Sorry, the language isn't available.\n Type:\n'e' for English;\n'f' for French.",
+	"valid_languages": ["E", "e", "F", "f"],
+	"valid_operators": ["a", "s", "m", "d"],
 	"en":
 	{
 		"welcome": "Welcome to the Calculator!",
