@@ -11,6 +11,8 @@
 		"invalid_number": "I'm sorry, that's not a valid number.\nPlease key in a valid number",
 		"invalid_operator": "I'm sorry, that's not a valid operator.\nPlease key in a valid operator: Type\n'a' to add;\n's' to substract; \n'm' to multiply;\n'd' to divide.\n",
 		"invalid_wish": "I'm sorry,that's not a valid choice.\nPlease key in Y/n:",
+		"valid_wishes": ["Y", "y", "N", "n"],
+		"calc_again": ["Y", "y"],
 		"thank_you": "Thank you for using the calculator! See you next time!",
 		"result": "The result of your calculation is: ",
 		"divide_zero":"You've tried to divide by zero. Please try again!"
@@ -21,10 +23,12 @@
 		"first_number": "Entrez le premier numéro :",
 		"second_number": "Entrez le deuxième numéro :",
 		"operation_type": "Quel type d'opération souhaitez-vous effectuer ? Tapez :\n'a' pour additionner ;\n's' pour soustraire ;\n'm' pour multiplier ;\n'd' pour diviser.\n",
-		"another_calculation": "Voulez-vous faire un autre calcul ? Y(pour oui)/n",
+		"another_calculation": "Voulez-vous faire un autre calcul ? O(pour oui)/n",
 		"invalid_number": "Je suis désolé, ce n'est pas un numéro valide.\nVeuillez saisir un numéro valide",
 		"invalid_operator": "Désolé, ce n'est pas un opérateur valide.\nVeuillez saisir un opérateur valide : Tapez\n'a' pour ajouter ;\n's' pour soustraire ; \n'm' pour multiplier ;\n'd' pour diviser.\n",
-		"invalid_wish": "Je suis désolé, ce n'est pas un choix valide.\nVeuillez saisir Y(pour oui)/n :",
+		"invalid_wish": "Je suis désolé, ce n'est pas un choix valide.\nVeuillez saisir O(pour oui)/n :",
+		"valid_wishes": ["O", "o","N", "n"],
+		"calc_again": ["O", "o"],
 		"thank_you": "Merci d'avoir utilisé la calculatrice ! À la prochaine !",
 		"result": "Le résultat de votre calcul est:",
 		"divide_zero":"Vous avez essayé de diviser par zéro. Veuillez réessayer !"

@@ -16,8 +16,8 @@ program works. Needed the hint!
 
 """
 # 20 Aug 24 935am
-# TODO: is_valid_operator: JSON file to include arrays of strings for lists of valid inputs. 
-# TODO: incorporate 'o' for French
+# TODO: is_valid_operator: JSON file to include arrays of strings for lists of valid inputs.  (done)
+# TODO: incorporate 'o' for French (done)
 # TODO: clearing screen at start of calculations.(done) 
 # TODO: typo for french operations (done)
 # TODO: declutter calculation function(done)
@@ -26,7 +26,6 @@ program works. Needed the hint!
 import json
 import os
 import time
-import pdb #remove before prod
 
 lang = ""
 
@@ -91,7 +90,7 @@ def invalid_operator_check(op):
     return op
 
 def invalid_wish_check(choice):
-    while choice not in ['Y', 'y', 'N', 'n']:
+    while choice not in lang["valid_wishes"]:
         prompt(lang["invalid_wish"])
         choice = input().strip()
     return choice
@@ -120,6 +119,11 @@ def calculation(numb1, numb2, operator):
                 return 'e'
             return numb1 / numb2
 
+def display_result(numb1, numb2, operator):
+        prompt(lang["result"])
+        print(f"=>    {calculation(float(numb1),float(numb2),operator):.2f}")
+
+
 def calculate_again():
     prompt(lang["another_calculation"])
     user_wishes = input().strip()
@@ -144,11 +148,13 @@ def main():
             prompt(lang["divide_zero"])
             time.sleep(2)
             continue
+        display_result(num1, num2, operator)
+        """
         prompt(lang["result"])
         print(f"=>    {calculation(float(num1),float(num2),operator):.2f}")
-
+        """
         user_wishes = calculate_again()
-        if user_wishes not in ['Y', 'y']:
+        if user_wishes not in lang["calc_again"]:
             calculate = False
         clear_screen()
 
