@@ -6,6 +6,9 @@
 Calculator for monthly mortgage payments
 """
 
+import os
+import json
+
 def prompt(message):
     print(f"=> {message}")
 
@@ -26,10 +29,10 @@ def monthly_mortgage_calculation(monthly_int, loan_amt, loan_dur):
 
 program_loop = True
 
+# PRINT "Welcome to the monthly mortgage calculator."
+prompt("Welcome to the monthly mortgage calculator.")
 # WHILE program_loop:
 while program_loop:
-# PRINT "Welcome to the monthly mortgage calculator."
-    prompt("Welcome to the monthly mortgage calculator.")
 # PRINT "Please enter your loan amount (we are assuming dollars)"
     prompt("Please enter your loan amount (we are assuming dollars): ")
 # GET loan amount from the user
@@ -64,5 +67,6 @@ while program_loop:
     # break
     if another_calc not in ['Y', 'y']: 
         break
+    os.system('clear')
 # PRINT "Thank you for using the mortgage calculator! Seeya next time!"
 prompt("Thank you for using the mortgage calculator! Seeya next time!")

@@ -20,7 +20,7 @@
 		"welcome": "Bienvenue dans la calculatrice !",
 		"first_number": "Entrez le premier numéro :",
 		"second_number": "Entrez le deuxième numéro :",
-		"operation_type": "Quel type d'opération souhaitez-vous effectuer ? Tapez :\n'a' pour additionner ;\n's' pour soustraire ;\n'a' pour multiplier ;\n'd' pour diviser.\n",
+		"operation_type": "Quel type d'opération souhaitez-vous effectuer ? Tapez :\n'a' pour additionner ;\n's' pour soustraire ;\n'm' pour multiplier ;\n'd' pour diviser.\n",
 		"another_calculation": "Voulez-vous faire un autre calcul ? Y(pour oui)/n",
 		"invalid_number": "Je suis désolé, ce n'est pas un numéro valide.\nVeuillez saisir un numéro valide",
 		"invalid_operator": "Désolé, ce n'est pas un opérateur valide.\nVeuillez saisir un opérateur valide : Tapez\n'a' pour ajouter ;\n's' pour soustraire ; \n'm' pour multiplier ;\n'd' pour diviser.\n",

@@ -15,6 +15,13 @@ program works. Needed the hint!
     TODO: clear screen
 
 """
+# 20 Aug 24 935am
+# TODO: trim user input of whitespace, for operators and to play again.
+# TODO: is_valid_operator: JSON file to include arrays of strings for lists of valid inputs. 
+# TODO: incorporate 'o' for French
+# TODO: clearing screen at start of calculations. 
+# TODO: typo for french operations (done)
+# TODO: declutter calculation function(done)
 
 import json
 import os
@@ -45,7 +52,7 @@ def is_valid_operator(op):
 def invalid_language_check(lang):
     while lang not in ['e', 'E', 'f', 'F']:
         prompt(msg_data["invalid_language"])
-        lang = input()
+        lang = input().strip()
     if lang in ('f', 'F'):
         lang = msg_data['fr']
     else:
@@ -55,42 +62,44 @@ def invalid_language_check(lang):
 def invalid_number_check(num):
     while is_valid_number(num) is False:
         prompt(lg["invalid_number"])
-        num = input()
+        num = input().strip()
     return num
 
 def invalid_operator_check(op):
     while is_valid_operator(op) is False:
         prompt(lg["invalid_operator"])
-        op = input()
+        op = input().strip()
     return op
 
 def invalid_wish_check(choice):
     while choice not in ['Y', 'y', 'N', 'n']:
         prompt(lg["invalid_wish"])
-        choice = input()
+        choice = input().strip()
     return choice
 
 # perform calculation, using match-case, and display the result.
 def calculation(numb1, numb2, operator):
+    numb1 = float(numb1)
+    numb2 = float(numb2)
     match operator.lower():
         case 'a':
-            return float(numb1) + float(numb2)
+            return numb1 + numb2
         case 's':
-            return float(numb1) - float(numb2)
+            return numb1 - numb2
         case 'm':
-            return float(numb1) * float(numb2)
+            return numb1 * numb2
         case 'd':
             try:
-                float(numb1) / float(numb2)
+                numb1 / numb2
             except ZeroDivisionError:
                 return 'e'
-            return float(numb1) / float(numb2)
+            return numb1 / numb2
 
 
 def main():
     prompt(msg_data["language"])
     global lg
-    lg = input()
+    lg = input().strip()
     lg = invalid_language_check(lg)
 
     calculate = True
@@ -99,15 +108,15 @@ def main():
     while calculate:
         clear_screen()
         prompt(lg["first_number"])
-        num1 = input()
+        num1 = input().strip()
         num1 = invalid_number_check(num1)
 
         prompt(lg["second_number"])
-        num2 = input()
+        num2 = input().strip()
         num2 = invalid_number_check(num2)
 
         prompt(lg["operation_type"])
-        operator = input()
+        operator = input().strip()
         operator = invalid_operator_check(operator)
 
         if calculation(num1, num2, operator) == 'e':
@@ -115,10 +124,10 @@ def main():
             time.sleep(2)
             continue
         prompt(lg["result"])
-        print(f"=>    {calculation(float(num1),float(num2),operator):.2f}.")
+        print(f"=>    {calculation(float(num1),float(num2),operator):.2f}")
 
         prompt(lg["another_calculation"])
-        user_wishes = input()
+        user_wishes = input().strip()
         user_wishes = invalid_wish_check(user_wishes)
         if user_wishes not in ['Y', 'y']:
             calculate = False
