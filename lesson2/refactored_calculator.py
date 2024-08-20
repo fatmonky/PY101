@@ -16,22 +16,33 @@ program works. Needed the hint!
 
 """
 # 20 Aug 24 935am
-# TODO: trim user input of whitespace, for operators and to play again.
 # TODO: is_valid_operator: JSON file to include arrays of strings for lists of valid inputs. 
 # TODO: incorporate 'o' for French
-# TODO: clearing screen at start of calculations. 
+# TODO: clearing screen at start of calculations.(done) 
 # TODO: typo for french operations (done)
 # TODO: declutter calculation function(done)
+# TODO: trim user input of whitespace, for operators and to play again. (done)
 
 import json
 import os
 import time
+import pdb #remove before prod
+
+lang = ""
 
 with open('calculator_messages.json', 'r') as file:
     msg_data = json.load(file)
 
 def clear_screen():
     os.system('clear')
+
+def choose_language():
+    clear_screen()
+    prompt(msg_data["language"])
+    global lang
+    lang = input().strip()
+    lang = invalid_language_check(lang)
+    return lang
 
 def prompt(message):
     print(f"=> {message}")
@@ -45,6 +56,14 @@ def is_valid_number(num):
         return True
     if isinstance(float_num, float):
         return True
+    else:
+        return False
+
+def enter_number(message):
+    prompt(lang[message])
+    num = input().strip()
+    num = invalid_number_check(num)
+    return num
 
 def is_valid_operator(op):
     return op.lower() in ['a', 's' ,'m' , 'd']
@@ -61,21 +80,27 @@ def invalid_language_check(lang):
 
 def invalid_number_check(num):
     while is_valid_number(num) is False:
-        prompt(lg["invalid_number"])
+        prompt(lang["invalid_number"])
         num = input().strip()
     return num
 
 def invalid_operator_check(op):
     while is_valid_operator(op) is False:
-        prompt(lg["invalid_operator"])
+        prompt(lang["invalid_operator"])
         op = input().strip()
     return op
 
 def invalid_wish_check(choice):
     while choice not in ['Y', 'y', 'N', 'n']:
-        prompt(lg["invalid_wish"])
+        prompt(lang["invalid_wish"])
         choice = input().strip()
     return choice
+
+def operator_choice():
+    prompt(lang["operation_type"])
+    operator = input().strip()
+    operator = invalid_operator_check(operator)
+    return operator
 
 # perform calculation, using match-case, and display the result.
 def calculation(numb1, numb2, operator):
@@ -95,44 +120,38 @@ def calculation(numb1, numb2, operator):
                 return 'e'
             return numb1 / numb2
 
+def calculate_again():
+    prompt(lang["another_calculation"])
+    user_wishes = input().strip()
+    user_wishes = invalid_wish_check(user_wishes)
+    return user_wishes
+
 
 def main():
-    prompt(msg_data["language"])
-    global lg
-    lg = input().strip()
-    lg = invalid_language_check(lg)
-
+    choose_language()
     calculate = True
-    prompt(lg["welcome"])
+    prompt(lang["welcome"])
+    time.sleep(0.5)
 
     while calculate:
         clear_screen()
-        prompt(lg["first_number"])
-        num1 = input().strip()
-        num1 = invalid_number_check(num1)
 
-        prompt(lg["second_number"])
-        num2 = input().strip()
-        num2 = invalid_number_check(num2)
-
-        prompt(lg["operation_type"])
-        operator = input().strip()
-        operator = invalid_operator_check(operator)
+        num1 = enter_number("first_number")
+        num2 = enter_number("second_number")
+        operator = operator_choice()
 
         if calculation(num1, num2, operator) == 'e':
-            prompt(lg["divide_zero"])
+            prompt(lang["divide_zero"])
             time.sleep(2)
             continue
-        prompt(lg["result"])
+        prompt(lang["result"])
         print(f"=>    {calculation(float(num1),float(num2),operator):.2f}")
 
-        prompt(lg["another_calculation"])
-        user_wishes = input().strip()
-        user_wishes = invalid_wish_check(user_wishes)
+        user_wishes = calculate_again()
         if user_wishes not in ['Y', 'y']:
             calculate = False
         clear_screen()
 
-    prompt(lg["thank_you"])
+    prompt(lang["thank_you"])
 
 main()
