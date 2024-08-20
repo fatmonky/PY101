@@ -15,13 +15,6 @@ program works. Needed the hint!
     TODO: clear screen
 
 """
-# 20 Aug 24 935am
-# TODO: is_valid_operator: JSON file to include arrays of strings for lists of valid inputs.  (done)
-# TODO: incorporate 'o' for French (done)
-# TODO: clearing screen at start of calculations.(done) 
-# TODO: typo for french operations (done)
-# TODO: declutter calculation function(done)
-# TODO: trim user input of whitespace, for operators and to play again. (done)
 
 import json
 import os
@@ -149,10 +142,6 @@ def main():
             time.sleep(2)
             continue
         display_result(num1, num2, operator)
-        """
-        prompt(lang["result"])
-        print(f"=>    {calculation(float(num1),float(num2),operator):.2f}")
-        """
         user_wishes = calculate_again()
         if user_wishes not in lang["calc_again"]:
             calculate = False
