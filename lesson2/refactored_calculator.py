@@ -35,6 +35,16 @@ def choose_language():
     lang = invalid_language_check(lang)
     return lang
 
+def invalid_language_check(lang):
+    while lang not in msg_data["valid_languages"]:
+        prompt(msg_data["invalid_language"])
+        lang = input().strip()
+    if lang in ('f', 'F'):
+        lang = msg_data['fr']
+    else:
+        lang = msg_data['en']
+    return lang
+
 def prompt(message):
     print(f"=> {message}")
 
@@ -50,6 +60,12 @@ def is_valid_number(num):
     else:
         return False
 
+def invalid_number_check(num, lang):
+    while is_valid_number(num) is False:
+        prompt(lang["invalid_number"])
+        num = input().strip()
+    return num
+
 def enter_number(message, lang):
     prompt(lang[message])
     num = input().strip()
@@ -59,33 +75,11 @@ def enter_number(message, lang):
 def is_valid_operator(op):
     return op.lower() in msg_data["valid_operators"]
 
-def invalid_language_check(lang):
-    while lang not in msg_data["valid_languages"]:
-        prompt(msg_data["invalid_language"])
-        lang = input().strip()
-    if lang in ('f', 'F'):
-        lang = msg_data['fr']
-    else:
-        lang = msg_data['en']
-    return lang
-
-def invalid_number_check(num, lang):
-    while is_valid_number(num) is False:
-        prompt(lang["invalid_number"])
-        num = input().strip()
-    return num
-
 def invalid_operator_check(op, lang):
     while is_valid_operator(op) is False:
         prompt(lang["invalid_operator"])
         op = input().strip()
     return op
-
-def invalid_wish_check(choice, lang):
-    while choice not in lang["valid_wishes"]:
-        prompt(lang["invalid_wish"])
-        choice = input().strip()
-    return choice
 
 def operator_choice(lang):
     prompt(lang["operation_type"])
@@ -115,6 +109,12 @@ def display_result(numb1, numb2, operator, lang):
     prompt(lang["result"])
     print(f"=>    {calculation(float(numb1),float(numb2),operator):.2f}")
 
+
+def invalid_wish_check(choice, lang):
+    while choice not in lang["valid_wishes"]:
+        prompt(lang["invalid_wish"])
+        choice = input().strip()
+    return choice
 
 def calculate_again(lang):
     prompt(lang["another_calculation"])
