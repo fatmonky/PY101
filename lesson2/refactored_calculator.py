@@ -16,6 +16,8 @@ program works. Needed the hint!
 
 20 Aug 453pm: completed incorporating Brandi's feedback! 
 
+20 Aug 930am: completed incorporating Brandi's feedback to tweak code, based on Pylint messages.
+
 """
 
 import json
@@ -55,10 +57,7 @@ def is_valid_number(num):
         return False
     if num.isdigit():
         return True
-    if isinstance(float_num, float):
-        return True
-    else:
-        return False
+    return isinstance(float_num, float)
 
 def invalid_number_check(num, lang):
     while is_valid_number(num) is False:
