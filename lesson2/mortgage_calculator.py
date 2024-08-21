@@ -1,8 +1,8 @@
 # TODO: remove pseudocode (done)
 # TODO: move all messages to JSON file.(done)
 # TODO: refactor code for clarity: move functionality to functions,  (mostly done)
-# TODO: troubleshoot calculate_again function, and how that fits into the main program loop.
 # TODO: check for edge cases: include helpers to check for valid input (partially done)
+# TODO: troubleshoot calculate_again function, and how that fits into the main program loop.
 # TODO: pylint code
 
 
@@ -12,6 +12,7 @@ Calculator for monthly mortgage payments
 
 import os
 import json
+import pdb #remove before prod
 
 with open('mortgage_messages.json','r') as file:
     msg_data = json.load(file)
@@ -82,8 +83,11 @@ def calculate_again():
         another_calc = input().strip()
         if another_calc not in msg_data["valid_calculation_choices"]:
             prompt(msg_data["invalid_choice"])
-        elif another_calc not in msg_data["calculation_choices"]:
+        if another_calc in msg_data["valid_calculation_choices"]:
             break
+    if another_calc in msg_data["calculation_choices"]:
+        return True
+    return False
 
 def main():
 
@@ -96,8 +100,10 @@ def main():
         LOAN_DURATION_MONTHLY = LOAN_DURATION_YEARS * 12
         results = monthly_mortgage_calculation(INTEREST_MONTHLY, LOAN_AMOUNT, LOAN_DURATION_MONTHLY)
         display_results(results)
-        if calculate_again() is False:
+        repeat_calc = calculate_again()
+        if repeat_calc is False:
             break
+    clear_screen()
     prompt(msg_data["farewell"])
 
 main()
