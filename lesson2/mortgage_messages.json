@@ -1,6 +1,7 @@
 {
 	"welcome":"Welcome to the monthly mortgage calculator.",
 	"loan_amount":"Please enter your loan amount (we are assuming dollars):", 
+	"invalid_number": "Sorry, the number you entered is not valid. Please try again.",
 	"annual_interest":"Please enter your annual interest in percentages e.g. if it's 4.5%, key in '4.5': ",
 	"loan_duration_years":"Please enter your loan duration in years",
 	"loan_duration_years_2": "(note: you may enter half years as 2.5 years): ",
