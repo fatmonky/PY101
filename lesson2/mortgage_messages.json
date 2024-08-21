@@ -1,0 +1,12 @@
+{
+	"welcome":"Welcome to the monthly mortgage calculator.",
+	"loan_amount":"Please enter your loan amount (we are assuming dollars):", 
+	"annual_interest":"Please enter your annual interest in percentages e.g. if it's 4.5%, key in '4.5': ",
+	"loan_duration_years":"Please enter your loan duration in years",
+	"loan_duration_years_2": "(note: you may enter half years as 2.5 years): ",
+	"monthly_mortgage_payment": "Your monthly mortgage payment is:",
+	"calculate_another?": "Would you like to calculate another mortgage? Y/n",
+	"valid_calculation_choices":["Y", "y","N", "n"],
+	"calculation_choices":["Y", "y"],
+	"farewell":"Thank you for using the mortgage calculator! Seeya next time!"
+}
