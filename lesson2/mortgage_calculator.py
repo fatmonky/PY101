@@ -1,18 +1,9 @@
-# TODO: remove pseudocode (done)
-# TODO: move all messages to JSON file.(done)
-# TODO: refactor code for clarity: move functionality to functions,  (mostly done)
-# TODO: check for edge cases: include helpers to check for valid input (partially done)
-# TODO: troubleshoot calculate_again function, and how that fits into the main program loop.
-# TODO: pylint code
-
-
 """
 Calculator for monthly mortgage payments
 """
 
 import os
 import json
-import pdb #remove before prod
 
 with open('mortgage_messages.json','r') as file:
     msg_data = json.load(file)
@@ -26,8 +17,7 @@ def clear_screen():
 def monthly_mortgage_calculation(monthly_int, loan_amt, loan_dur):
     if monthly_int == 0:
         return loan_amt / loan_dur
-    else:
-        return loan_amt * (monthly_int / (1 - (1 + monthly_int)
+    return loan_amt * (monthly_int / (1 - (1 + monthly_int)
                                           ** (- loan_dur)))
 
 def valid_number_check(num):
@@ -48,33 +38,33 @@ def get_loan_amount():
     prompt(msg_data["welcome"])
     while True:
         prompt(msg_data["loan_amount"])
-        LOAN_AMOUNT = input().strip()
-        number_validation(LOAN_AMOUNT)
-        if valid_number_check(LOAN_AMOUNT):
+        loan_amount = input().strip()
+        number_validation(loan_amount)
+        if valid_number_check(loan_amount):
             break
-    return float(LOAN_AMOUNT)
+    return float(loan_amount)
 
 def get_annual_interest():
     while True:
         prompt(msg_data["annual_interest"])
-        ANNUAL_INTEREST = input().strip()
-        number_validation(ANNUAL_INTEREST)
-        if valid_number_check(ANNUAL_INTEREST):
-           break 
-    return float(ANNUAL_INTEREST)
+        annual_interest = input().strip()
+        number_validation(annual_interest)
+        if valid_number_check(annual_interest):
+            break
+    return float(annual_interest)
 
 def get_loan_duration_years():
     while True:
         prompt(msg_data["loan_duration_years"])
         prompt(msg_data["loan_duration_years_2"])
-        LOAN_DURATION_YEARS = input().strip()
-        number_validation(LOAN_DURATION_YEARS)
-        if valid_number_check(LOAN_DURATION_YEARS):
+        loan_duration_years = input().strip()
+        number_validation(loan_duration_years)
+        if valid_number_check(loan_duration_years):
             break
-    return float(LOAN_DURATION_YEARS)
+    return float(loan_duration_years)
 
 def display_results(results):
-    prompt(msg_data["monthly_mortgage_payment"]) 
+    prompt(msg_data["monthly_mortgage_payment"])
     prompt(f"${results:.2f}.")
 
 def calculate_again():
@@ -90,15 +80,16 @@ def calculate_again():
     return False
 
 def main():
-
     while True:
         clear_screen()
-        LOAN_AMOUNT = get_loan_amount()
-        ANNUAL_INTEREST = get_annual_interest()
-        LOAN_DURATION_YEARS = get_loan_duration_years()
-        INTEREST_MONTHLY = (ANNUAL_INTEREST / 12) / 100
-        LOAN_DURATION_MONTHLY = LOAN_DURATION_YEARS * 12
-        results = monthly_mortgage_calculation(INTEREST_MONTHLY, LOAN_AMOUNT, LOAN_DURATION_MONTHLY)
+        loan_amount = get_loan_amount()
+        annual_interest = get_annual_interest()
+        loan_duration_years = get_loan_duration_years()
+        interest_monthly = (annual_interest / 12) / 100
+        loan_duration_monthly = loan_duration_years * 12
+        results = monthly_mortgage_calculation(
+                interest_monthly, loan_amount,
+                loan_duration_monthly)
         display_results(results)
         repeat_calc = calculate_again()
         if repeat_calc is False:
