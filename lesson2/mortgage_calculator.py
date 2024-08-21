@@ -1,7 +1,8 @@
 # TODO: remove pseudocode (done)
 # TODO: move all messages to JSON file.(done)
-# TODO: refactor code for clarity: move functionality to functions, 
-# TODO: check for edge cases: include helpers to check for valid input
+# TODO: refactor code for clarity: move functionality to functions,  (mostly done)
+# TODO: troubleshoot calculate_again function, and how that fits into the main program loop.
+# TODO: check for edge cases: include helpers to check for valid input (partially done)
 # TODO: pylint code
 
 
@@ -46,7 +47,7 @@ def get_loan_amount():
     prompt(msg_data["welcome"])
     while True:
         prompt(msg_data["loan_amount"])
-        LOAN_AMOUNT = input()
+        LOAN_AMOUNT = input().strip()
         number_validation(LOAN_AMOUNT)
         if valid_number_check(LOAN_AMOUNT):
             break
@@ -55,7 +56,7 @@ def get_loan_amount():
 def get_annual_interest():
     while True:
         prompt(msg_data["annual_interest"])
-        ANNUAL_INTEREST = input()
+        ANNUAL_INTEREST = input().strip()
         number_validation(ANNUAL_INTEREST)
         if valid_number_check(ANNUAL_INTEREST):
            break 
@@ -65,33 +66,37 @@ def get_loan_duration_years():
     while True:
         prompt(msg_data["loan_duration_years"])
         prompt(msg_data["loan_duration_years_2"])
-        LOAN_DURATION_YEARS = input()
+        LOAN_DURATION_YEARS = input().strip()
         number_validation(LOAN_DURATION_YEARS)
         if valid_number_check(LOAN_DURATION_YEARS):
             break
     return float(LOAN_DURATION_YEARS)
 
-def display_results():
+def display_results(results):
     prompt(msg_data["monthly_mortgage_payment"]) 
-    prompt(f"${monthly_mortgage_calculation(INTEREST_MONTHLY, LOAN_AMOUNT, LOAN_DURATION_MONTHLY):.2f}.")
+    prompt(f"${results:.2f}.")
 
+def calculate_again():
+    while True:
+        prompt(msg_data["calculate_another?"])
+        another_calc = input().strip()
+        if another_calc not in msg_data["valid_calculation_choices"]:
+            prompt(msg_data["invalid_choice"])
+        elif another_calc not in msg_data["calculation_choices"]:
+            break
 
 def main():
 
     while True:
         clear_screen()
         LOAN_AMOUNT = get_loan_amount()
-
         ANNUAL_INTEREST = get_annual_interest()
-
         LOAN_DURATION_YEARS = get_loan_duration_years()
-
         INTEREST_MONTHLY = (ANNUAL_INTEREST / 12) / 100
         LOAN_DURATION_MONTHLY = LOAN_DURATION_YEARS * 12
-        display_results()
-        prompt(msg_data["calculate_another?"])
-        another_calc = input()
-        if another_calc not in msg_data["calculation_choices"]:
+        results = monthly_mortgage_calculation(INTEREST_MONTHLY, LOAN_AMOUNT, LOAN_DURATION_MONTHLY)
+        display_results(results)
+        if calculate_again() is False:
             break
     prompt(msg_data["farewell"])
 

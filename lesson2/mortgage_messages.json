@@ -8,6 +8,7 @@
 	"monthly_mortgage_payment": "Your monthly mortgage payment is:",
 	"calculate_another?": "Would you like to calculate another mortgage? Y/n",
 	"valid_calculation_choices":["Y", "y","N", "n"],
+	"invalid_choice": "Sorry, but you entered an invalid choice.",
 	"calculation_choices":["Y", "y"],
 	"farewell":"Thank you for using the mortgage calculator! Seeya next time!"
 }
