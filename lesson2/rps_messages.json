@@ -1,0 +1,5 @@
+{
+	"valid_choices":{"r": "rock", "p": "paper", "s": "scissors"},
+	"user_instruction":"Choose one: 'r' for rock, 'p' for paper, 's' for scissors",
+	"invalid_choice":"That's not a valid choice."
+}
