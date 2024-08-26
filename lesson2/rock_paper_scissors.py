@@ -1,6 +1,10 @@
 """
 Command Line rock-paper-scissors game
 """
+# TODO: best of five
+# TODO: add lizard and spock
+# TODO: shortened input for spock
+# TODO: fix Pylint complaints
 
 import os
 import json
@@ -57,13 +61,18 @@ def get_play_again():
         prompt(MSG_DATA["play_again"])
         play_again = input().lower().strip()
         if play_again not in ["Y", "y", "n", "N"]:
-            prompt("That's not a valid response.")
             prompt(MSG_DATA["invalid_choice"])
             prompt(MSG_DATA["play_again"])
             play_again = input().lower().strip()
         if play_again in ["Y","y","n","N"]:
             break
     return play_again
+
+
+def display_current_score(user_score,computer_score):
+    print("\n")
+    prompt(f"Your current score: {user_score}")
+    prompt(f"vs. the computer score: {computer_score}")
 
 def display_scores_farewell(user_score,computer_score):
     prompt(f"Your final score is {user_score}")
@@ -77,6 +86,7 @@ def main():
     user_score = 0
     computer_score = 0
     while True:
+        clear_screen()
         user_choice = get_user_choice()
         user_choice_value = MSG_DATA[
                 "valid_choices"].get(user_choice, "invalid option")
@@ -86,11 +96,17 @@ def main():
         display_user_choice(user_choice_value)
 
         user_win = determine_winner(user_choice_value, computer_choice_value)
-
         user_score, computer_score = change_winner_scores(user_win, user_score, computer_score)
-
+        display_current_score(user_score, computer_score)
         if get_play_again() in ["N","n"]:
             break
+        if user_score >= 3:
+            prompt("Congratulations! You've won!")
+            break
+        if computer_score >= 3:
+            prompt("Sorry to say, you lost... Better luck next time?")
+            break
+            
 
     clear_screen()
     display_scores_farewell(user_score, computer_score)
