@@ -2,11 +2,6 @@
 Calculator for monthly mortgage payments
 """
 
-# TODO: address input validation, with negative numbers or 0 for loan amounts. (done)
-# TODO: address program crash when loan duration 0 (done)
-# TODO: show example for dollar amount (done)
-# TODO: get_get_calculation_again (done)
-
 import os
 import json
 
