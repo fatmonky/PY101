@@ -1,9 +1,9 @@
 """
 Command Line rock-paper-scissors game
 """
-# TODO: best of five
-# TODO: add lizard and spock
-# TODO: shortened input for spock
+# TODO: best of five (done)
+# TODO: add lizard and spock into winning logic
+# TODO: shortened input for spock (done)
 # TODO: fix Pylint complaints
 
 import os
@@ -55,7 +55,6 @@ def change_winner_scores(who_wins, score1, score2):
         score2 += 1
     return score1, score2
 
-
 def get_play_again():
     while True:
         prompt(MSG_DATA["play_again"])
@@ -68,7 +67,6 @@ def get_play_again():
             break
     return play_again
 
-
 def display_current_score(user_score,computer_score):
     print("\n")
     prompt(f"Your current score: {user_score}")
@@ -79,13 +77,22 @@ def display_scores_farewell(user_score,computer_score):
     prompt(f"vs. the computer score of {computer_score}")
     prompt("Goodbye!")
 
+def best_of_five(user_score, computer_score):
+    if user_score >= 3:
+        prompt("Congratulations! You've won!")
+        return False
+    if computer_score >= 3:
+        prompt("Sorry to say, you lost... Better luck next time?")
+        return False
+    return True
 
 
 def main():
     clear_screen()
     user_score = 0
     computer_score = 0
-    while True:
+    tournament_on = True
+    while tournament_on:
         clear_screen()
         user_choice = get_user_choice()
         user_choice_value = MSG_DATA[
@@ -98,17 +105,11 @@ def main():
         user_win = determine_winner(user_choice_value, computer_choice_value)
         user_score, computer_score = change_winner_scores(user_win, user_score, computer_score)
         display_current_score(user_score, computer_score)
-        if get_play_again() in ["N","n"]:
+        
+        tournament_on = best_of_five(user_score, computer_score)
+        if (tournament_on is False) or (get_play_again() in ["N","n"]):
             break
-        if user_score >= 3:
-            prompt("Congratulations! You've won!")
-            break
-        if computer_score >= 3:
-            prompt("Sorry to say, you lost... Better luck next time?")
-            break
-            
 
-    clear_screen()
     display_scores_farewell(user_score, computer_score)
 
 main()
