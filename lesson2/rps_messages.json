@@ -3,5 +3,16 @@
 	"user_instruction":"Choose one:\n'r' for rock,\n'p' for paper,\n's' for scissors,\n'l' for lizard,\n'sp' for spock\n",
 	"invalid_choice":"That's not a valid choice.",
 	"invalid_response":"That's not a valid response.",
-	"play_again":"Play again? Y/n: "
+	"play_again_choices":["Y","y","n","N"],
+	"not_playing_again":["N", "n"],
+	"congratulations":"Congratulations! You've won!\n",
+	"sorry":"Sorry to say, you lost... Better luck next time?\n",
+	"play_again":"Play again? Y/n: ",
+	"WINNING_CHOICES":{
+        "rock":["lizard", "scissors"],
+        "paper":["rock", "spock"],
+        "scissors":["paper", "lizard"],
+        "spock":["rock", "scissors"],
+        "lizard":["paper", "spock"]
+        }
 }

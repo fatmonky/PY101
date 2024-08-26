@@ -1,10 +1,6 @@
 """
 Command Line rock-paper-scissors game
 """
-# TODO: best of five (done)
-# TODO: add lizard and spock into winning logic
-# TODO: shortened input for spock (done)
-# TODO: fix Pylint complaints
 
 import os
 import json
@@ -32,21 +28,10 @@ def display_computer_choice(choice):
     prompt(f"The computer chose: {choice.title()}")
 
 def display_user_choice(choice):
-    prompt(f"You chose: {choice.title()}")
+    prompt(f"You chose: {choice.title()}\n")
 
-def determine_winner(user, computer):
-    if ((user == "rock" and computer == "scissors") or
-    (user == "paper" and computer == "rock") or
-    (user == "scissors" and computer == "paper")):
-        prompt("You have won!")
-        return True
-    if ((user == "rock" and computer == "paper") or
-    (user == "paper" and computer == "scissors") or
-    (user == "scissors" and computer == "rock")):
-        prompt("The Computer Won!")
-        return False
-    prompt("It's a Tie!")
-    return None
+def player_wins(player_choice, computer_choice):
+    return computer_choice in MSG_DATA["WINNING_CHOICES"][player_choice]
 
 def change_winner_scores(who_wins, score1, score2):
     if who_wins:
@@ -59,33 +44,40 @@ def get_play_again():
     while True:
         prompt(MSG_DATA["play_again"])
         play_again = input().lower().strip()
-        if play_again not in ["Y", "y", "n", "N"]:
+        if play_again not in MSG_DATA["play_again_choices"]:
             prompt(MSG_DATA["invalid_choice"])
             prompt(MSG_DATA["play_again"])
             play_again = input().lower().strip()
-        if play_again in ["Y","y","n","N"]:
+        if play_again in MSG_DATA["play_again_choices"]:
             break
     return play_again
 
 def display_current_score(user_score,computer_score):
-    print("\n")
     prompt(f"Your current score: {user_score}")
-    prompt(f"vs. the computer score: {computer_score}")
+    prompt(f"vs. the computer score: {computer_score}\n")
 
 def display_scores_farewell(user_score,computer_score):
     prompt(f"Your final score is {user_score}")
-    prompt(f"vs. the computer score of {computer_score}")
+    prompt(f"vs. the computer score of {computer_score}\n")
     prompt("Goodbye!")
 
 def best_of_five(user_score, computer_score):
     if user_score >= 3:
-        prompt("Congratulations! You've won!")
         return False
     if computer_score >= 3:
-        prompt("Sorry to say, you lost... Better luck next time?")
         return False
     return True
 
+def player_wins_tournament(user_score):
+    if user_score >= 3:
+        return True
+    return False
+
+def display_winner(user_score):
+    if player_wins_tournament(user_score):
+        prompt(MSG_DATA["congratulations"])
+    else:
+        prompt(MSG_DATA["sorry"])
 
 def main():
     clear_screen()
@@ -102,14 +94,19 @@ def main():
         display_computer_choice(computer_choice_value)
         display_user_choice(user_choice_value)
 
-        user_win = determine_winner(user_choice_value, computer_choice_value)
-        user_score, computer_score = change_winner_scores(user_win, user_score, computer_score)
+        user_win = player_wins(user_choice_value, computer_choice_value)
+        user_score, computer_score = change_winner_scores(user_win,
+                                                          user_score,
+                                                          computer_score)
         display_current_score(user_score, computer_score)
-        
-        tournament_on = best_of_five(user_score, computer_score)
-        if (tournament_on is False) or (get_play_again() in ["N","n"]):
-            break
 
-    display_scores_farewell(user_score, computer_score)
+        tournament_on = best_of_five(user_score, computer_score)
+        if tournament_on is False:
+            display_winner(user_score)
+            break
+        if get_play_again() in MSG_DATA["not_playing_again"]:
+            break
+    if tournament_on is True:
+        display_scores_farewell(user_score, computer_score)
 
 main()
