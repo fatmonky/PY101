@@ -44,6 +44,13 @@ def determine_winner(user, computer):
     prompt("It's a Tie!")
     return None
 
+def change_winner_scores(who_wins, score1, score2):
+    if who_wins:
+        score1 += 1
+    elif who_wins is False:
+        score2 += 1
+    return score1, score2
+
 
 def get_play_again():
     while True:
@@ -80,10 +87,7 @@ def main():
 
         user_win = determine_winner(user_choice_value, computer_choice_value)
 
-        if user_win:
-            user_score += 1
-        elif user_win is False:
-            computer_score += 1
+        user_score, computer_score = change_winner_scores(user_win, user_score, computer_score)
 
         if get_play_again() in ["N","n"]:
             break
