@@ -1,0 +1,3 @@
+# try1 27 Aug 24 341pm
+print(0.3 + 0.6) #0.9 #model answer: 0.8999999...
+print(0.3 + 0.6 == 0.9) # False, because of floating point imprecision.
