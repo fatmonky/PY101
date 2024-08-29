@@ -6,6 +6,8 @@ import os
 import json
 import random
 
+MAX_SCORE = 3
+
 with open('rps_messages.json','r') as file:
     MSG_DATA = json.load(file)
 
@@ -62,16 +64,14 @@ def display_scores_farewell(user_score,computer_score):
     prompt("Goodbye!")
 
 def best_of_five(user_score, computer_score):
-    if user_score >= 3:
+    if user_score >= MAX_SCORE:
         return False
-    if computer_score >= 3:
+    if computer_score >= MAX_SCORE:
         return False
     return True
 
 def player_wins_tournament(user_score):
-    if user_score >= 3:
-        return True
-    return False
+    return user_score >= MAX_SCORE
 
 def display_winner(user_score):
     if player_wins_tournament(user_score):
@@ -101,7 +101,7 @@ def main():
         display_current_score(user_score, computer_score)
 
         tournament_on = best_of_five(user_score, computer_score)
-        if tournament_on is False:
+        if not tournament_on:
             display_winner(user_score)
             break
         if get_play_again() in MSG_DATA["not_playing_again"]:
