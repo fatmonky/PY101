@@ -22,7 +22,7 @@ def crunch(string):
     new_string = ""
     old_char = ''
     for char in string:
-        if char == old_char:
+        if char == old_char: # uses old_char to track an old char
             pass
         else:
             new_string += char

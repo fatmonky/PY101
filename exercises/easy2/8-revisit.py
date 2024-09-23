@@ -12,7 +12,11 @@ Bonus question: Try to solve the problem using list slicing.
 def oddities(lst):
     new_lst = lst[::2]
     return new_lst
-"""
+
+def oddities(lst):
+    return lst[::2]
+    """
+
 def oddities(lst):
     new_list = []
     for idx in range(len(lst)):
